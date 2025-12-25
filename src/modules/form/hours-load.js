@@ -12,11 +12,12 @@ export function hoursLoad({date}){
     const isValidate = dayjs(date).add(hours, "hour").isAfter();
 
     return {
-      hour: hours,
+      hour: hoursOpening,
       avaliable: isValidate,
     }
   })
 
+  clearList()
 
   opening.forEach(({hour, avaliable}) => {
     const li = document.createElement("li");
@@ -28,17 +29,21 @@ export function hoursLoad({date}){
     hours.append(li);
 
 
-    if(hour === "09"){
+    if(hour === "09:00"){
       hourHeaderAdd({title: "Manha"})
-    } else if(hour === "12") {
+    } else if(hour === "12:00") {
       hourHeaderAdd({title: "Tarde"})
-    } else if(hour === "17"){
+    } else if(hour === "17:00"){
       hourHeaderAdd({title: "Noite"})
     }
 
   });
 
   hoursClick()
+}
+
+function clearList(){
+  hours.innerHTML = "";
 }
 
 function hourHeaderAdd({title}){
