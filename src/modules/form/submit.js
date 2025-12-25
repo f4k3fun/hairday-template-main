@@ -1,8 +1,10 @@
 import dayjs from "dayjs";
+import { scheduleNew } from "../../styles/schedule-new.js";
 
 const form = document.querySelector("form");
 const selectedDate = document.getElementById("date");
 const clientName = document.getElementById("client");
+
 
 
 // Carrega a data atual.
@@ -13,20 +15,20 @@ selectedDate.min = inputToday
 
 
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
 
-  try{
+  try {
     const name = clientName.value.trim();
-    if(!name){
+    if (!name) {
       return alert("Informe o nome do cliente!");
     };
 
 
     const hourSelectd = document.querySelector(".hour-selected");
 
-    if(!hourSelectd){
+    if (!hourSelectd) {
       return alert("Selecione a hora");
     }
 
@@ -39,11 +41,15 @@ form.addEventListener("submit", (e) => {
     const id = new Date().getTime()
 
 
+    await scheduleNew({
+      id: id,
+      name: name,
+      when: when,
+    })
 
-
-  } catch(error){
+  } catch (error) {
     alert("Nao foi possivel realizar o agendamento.");
     console.log(error)
   }
 
-} )
+})
