@@ -5,15 +5,23 @@ import { hoursClick } from "./hours-click.js";
 
 const hours = document.getElementById("hours");
 
-export function hoursLoad({date}){
+export function hoursLoad({date, schedules}){
+
+  const unavailableHours = schedules.map((schedule) => dayjs(schedule.when).format("HH:mm"));
+
+
+  console.log(unavailableHours)
+
   const opening = openingHours.map((hoursOpening) => {
     const [hours, _] = hoursOpening.split(":");
 
-    const isValidate = dayjs(date).add(hours, "hour").isAfter();
+    const isValidate = dayjs(date).add(hours, "hour").isBefore();
+
+    const avaliable = !unavailableHours.includes(hoursOpening) && !isValidate
 
     return {
       hour: hoursOpening,
-      avaliable: isValidate,
+      avaliable: avaliable,
     }
   })
 

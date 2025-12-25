@@ -1,4 +1,4 @@
-import { apiConfig } from "../services/api-config.js";
+import { apiConfig } from "./api-config.js";
 
 export async function scheduleNew({ id, name, when }) {
   try {

@@ -1,9 +1,8 @@
-import { hoursLoad } from "./hours-load";
-
+import { schedulesDay } from "../schedules/load.js";
 const selectdDate = document.getElementById("date");
 
 
 selectdDate.addEventListener("change", () => {
   
-  hoursLoad({date: selectdDate.value})
+  schedulesDay()
 })
